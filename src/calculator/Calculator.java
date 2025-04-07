@@ -20,7 +20,7 @@ package calculator;
  * </ul>
  *
  * @author Brandon Berger, ...
- * @version 0.1
+ * @version 0.7
  * @since 2025.04.07
  * @see <a href="https://github.com/JRBerger123/Calculator-App">GitHub Repository</a>
  * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
@@ -52,42 +52,76 @@ public class Calculator<N extends Number> implements BasicMath<N> {
      * Adds the input value to the previous value.
      * @param a the input value to be added
      */
+    @Override
     public void add(N a) {
         this.operator = '+';
-        this.currentValue = this.previousValue + a.doubleValue();
-        updateDisplay();
+
+        try {
+            this.currentValue = this.previousValue + a.doubleValue();
+            updateDisplay();
+        }
+        catch (Exception e) {
+            // Handles any exceptions that may occur
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     /**
      * Subtracts the input value from the previous value.
      * @param a the input value to be subtracted
      */
+    @Override
     public void subtract(N a) {
         this.operator = '-';
-        this.currentValue = this.previousValue - a.doubleValue();
+
+        try {
+            this.currentValue = this.previousValue - a.doubleValue();
+            updateDisplay();
+        }
+        catch (Exception e) {
+            // Handles any exceptions that may occur
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     /**
      * Multiplies the input value with the previous value.
      * @param a the input value to be multiplied
      */
+    @Override
     public void multiply(N a) {
         this.operator = '*';
-        this.currentValue = this.previousValue * a.doubleValue();
+        
+        try {
+            this.currentValue = this.previousValue * a.doubleValue();
+            updateDisplay();
+        }
+        catch (Exception e) {
+            // Handles any exceptions that may occur
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     /**
      * Divides the previous value by the input value.
      * @param a the input value to divide by
      */
+    @Override
     public void divide(N a) {
-        if (a.doubleValue() == 0) {
-            System.out.println("Error: Division by zero is not allowed.");
-            return;
-        }
-
         this.operator = '/';
-        this.currentValue = this.previousValue / a.doubleValue();
+
+        try {
+            this.currentValue = this.previousValue / a.doubleValue();
+            updateDisplay();
+        } 
+        catch (ArithmeticException e) {
+            // Handles division by zero
+            System.out.println("Error: " + e.getMessage());
+        } 
+        catch (Exception e) {
+            // Handles any other exceptions that may occur
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     /**
