@@ -25,7 +25,7 @@ package calculator;
  * @see <a href="https://github.com/JRBerger123/Calculator-App">GitHub Repository</a>
  * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
  */
-public class Calculator<N extends Number> implements BasicMath<N> {
+public abstract class Calculator<N extends Number> implements BasicMath<N> {
     /**
      * Represents the previous value of the calculator.
      */
