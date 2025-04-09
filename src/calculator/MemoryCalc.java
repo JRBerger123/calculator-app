@@ -14,11 +14,12 @@ package calculator;
  *    <li>{@link #setMemoryValue()} - Sets the memory value to the current value.</li>
  * </ul>
  * @param <N> the type of number (e.g., Integer, Double) that this class will work with
- * @author Brandon Berger, ...
- * @version 0.7
+ * @author Brandon Berger, Michael Szigethy
+ * @version 1.0
  * @since 2025.04.08
  * @see <a href="https://github.com/JRBerger123/Calculator-App">GitHub Repository</a>
  * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
+ * @see <a href="https://github.com/Miz-Bl">Micahel Szigethy's GitHub</a>
  */
 public class MemoryCalc<N extends Number> extends Calculator<N> {
     double memoryValue = 0.0;
