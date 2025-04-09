@@ -40,15 +40,17 @@ public class MemoryCalc<N extends Number> extends Calculator<N> {
     /**
      * Adds the current value to the memory value.
      */
+    @SuppressWarnings("unchecked") // Suppress unchecked cast warning for Number to N as memoryValue is of type double, a valid Number type.
     void memoryAdd() {
-        this.currentValue += memoryValue;
+        add((N)(Number) this.memoryValue);
     }
 
     /**
      * Subtracts the current value from the memory value.
      */
+    @SuppressWarnings("unchecked") // Suppress unchecked cast warning for Number to N as memoryValue is of type double, a valid Number type.
     void memorySubtract() {
-        this.currentValue -= memoryValue;
+        subtract((N)(Number) this.memoryValue);
     }
 
     /**
@@ -56,13 +58,13 @@ public class MemoryCalc<N extends Number> extends Calculator<N> {
      * @return a double of the current memory value
      */
     double getMemoryValue() {
-        return memoryValue;
+        return this.memoryValue;
     }
 
     /**
      * Sets the memory value to the current value.
      */
     void setMemoryValue() {
-        this.memoryValue = currentValue;
+        this.memoryValue = this.currentValue;
     }
 }
