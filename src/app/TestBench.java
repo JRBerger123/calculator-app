@@ -13,24 +13,61 @@ public class TestBench {
     class BasicCalc extends Calculator<Double> {}
     class AdvancedCalc extends AdvanceCalc<Double> {}
 
-    public TestBench() {
-        BasicCalc basicCalc = new BasicCalc();
-        AdvancedCalc advancedCalc = new AdvancedCalc();
-        welcomePrompt(basicCalc);
+    public void setPrecision(Object calc) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("What would you like your calculator's decimal precision to be (0-10)? ");
+            int precision = scanner.nextInt();
+            if (precision < 0 || precision > 10) {
+                throw new IllegalArgumentException("Precision must be between 0 and 10.");
+            }
 
-        
-        welcomePrompt(advancedCalc);
+            if (calc instanceof AdvanceCalc<?> ac) { // Required to use subclass method of setPrecision
+                ac.setPrecision(precision);
+            }
+            
+            System.out.println("Decimal precision set to: " + precision);
+        } 
+        catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void run() {
+        //...
+    }
+
+    public boolean promptAdvancedFeatures() {
+        try (Scanner scanner = new Scanner(System.in)) {
+            while(true) {
+                System.out.println("Would you like advanced Calculator features? ");
+                String userInput = scanner.nextLine();
+
+                switch (userInput) {
+                    case "1", "yes", "y" -> {
+                        System.out.println("Advanced Calculator features enabled.");
+                        return true; // Return true to indicate advanced features are enabled
+                    }
+                    case "2", "no", "n" -> {
+                        System.out.println("Basic Calculator features only.");
+                        return false; // Return false to indicate basic features only
+                    }
+                    default -> {
+                        System.out.println("Invalid input. Please enter 'yes' or 'no'.");
+                    }
+                }
+            }
+        }
     }
 
     public void welcomePrompt(Object calc) {
-        Scanner scanner = new Scanner(System.in); // Create scanner once
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Welcome to the Calculator App!");
         System.out.println("This app allows you to perform arithmetic operations.");
 
         if (calc instanceof AdvanceCalc) {
         System.out.println("You are using the Advanced Calculator.");
-        System.out.print("What would you like your calculator's decimal precision to be (0-10)? ");
+
 
         // Validate user input
         while (true) {
@@ -97,7 +134,19 @@ public class TestBench {
     }
 
     public static void main(String[] args) {
-        System.out.println("TestBench is running...");
-        new TestBench();
+        TestBench testBench = new TestBench();
+
+        if (testBench.promptAdvancedFeatures()) {
+            AdvancedCalc calculator = testBench.new AdvancedCalc();
+            welcomePrompt(calculator);
+        } else {
+            BasicCalc calculator = testBench.new BasicCalc();
+        }
+
+        try (Scanner scanner = new Scanner(System.in)) {
+            testBench.welcomePrompt(args);
+        }
+
+        testBench.run();
     }
 }
