@@ -19,34 +19,35 @@ package calculator;
  *      <li>{@link #updateDisplay()} - Displays what mathematical operation happened and the results.</li>
  * </ul>
  *
- * @author Brandon Berger, ...
- * @version 0.7
+ * @author Brandon Berger, Michahel Szigethy
+ * @version 0.8
  * @since 2025.04.07
  * @see <a href="https://github.com/JRBerger123/Calculator-App">GitHub Repository</a>
  * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
+ * @see <a href="https://github.com/Miz-Bl">Micahel Szigethy's GitHub</a>
  */
 public abstract class Calculator<N extends Number> implements BasicMath<N> {
     /**
      * Represents the previous value of the calculator.
      */
-    double previousValue = 0.0;
+    double previousValue;
 
     /**
      * Represents the current value of the calculator.
      * This value is updated after each operation.
      */
-    public double currentValue = 0.0;
+    public double currentValue;
 
     /**
      * Represents the new input value of the calculator.
      * This value is used for calculations.
      */
-    double inputValue = 0.0;
+    double inputValue;
 
     /**
-     * Represents the operator used for the last operation.
+     * Represents the operator used for the operation.
      */
-    char operator = '+';
+    char operator;
 
     public Calculator() {
         clear();
@@ -136,7 +137,7 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
     /**
      * Clears the calculator's previous and current values, input value, and operator.
      */
-    public void clear() {
+    public final void clear() {
         previousValue = 0.0;
         currentValue = 0.0;
         inputValue = 0.0;
