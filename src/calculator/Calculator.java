@@ -35,7 +35,7 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
      * Represents the current value of the calculator.
      * This value is updated after each operation.
      */
-    double currentValue = 0.0;
+    public double currentValue = 0.0;
 
     /**
      * Represents the new input value of the calculator.
