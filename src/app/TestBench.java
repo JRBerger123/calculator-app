@@ -84,32 +84,27 @@ public class TestBench {
                 Calculator<Double> bc = (Calculator<Double>) calculator;
 
                 System.out.println("Available operations: +, -, *, /, mem");
-                System.out.print("Enter an operation: ");
-                String userInput = scanner.nextLine();
+                String userInput = Input.getString("Enter an operation: ");
 
                 switch (userInput) {
                     case "1", "+", "add" -> {
-                        System.out.print("Enter the number to add: ");
-                        double addend = scanner.nextDouble();
-                        bc.add(addend);
+                        double val = Input.getDouble("Enter the number to add: ");
+                        bc.add(val);
                     }
     
                     case "2", "-", "subtract" -> {
-                        System.out.print("Enter the number to subtract: ");
-                        double subtrahend = scanner.nextDouble();
-                        bc.subtract(subtrahend);
+                        double val = Input.getDouble("Enter the number to subtract: ");
+                        bc.subtract(val);
                     }
     
                     case "3", "*", "multiply" -> {
-                        System.out.print("Enter the number to multiply: ");
-                        double multiplicand = scanner.nextDouble();
-                        bc.multiply(multiplicand);
+                        double val = Input.getDouble("Enter the number to multiply: ");
+                        bc.multiply(val);
                     }
     
                     case "4", "/", "divide" -> {
-                        System.out.print("Enter the number to divide: ");
-                        double divisor = scanner.nextDouble();
-                        bc.divide(divisor);
+                        double val = Input.getDouble("Enter the number to divide: ");
+                        bc.divide(val);
                     }
 
                     case "exit" -> {
