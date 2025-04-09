@@ -59,6 +59,7 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
         try {
             this.currentValue = this.previousValue + a.doubleValue();
             updateDisplay();
+            this.previousValue = this.currentValue;
         }
         catch (Exception e) {
             // Handles any exceptions that may occur
@@ -77,6 +78,7 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
         try {
             this.currentValue = this.previousValue - a.doubleValue();
             updateDisplay();
+            this.previousValue = this.currentValue;
         }
         catch (Exception e) {
             // Handles any exceptions that may occur
@@ -95,6 +97,7 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
         try {
             this.currentValue = this.previousValue * a.doubleValue();
             updateDisplay();
+            this.previousValue = this.currentValue;
         }
         catch (Exception e) {
             // Handles any exceptions that may occur
@@ -113,6 +116,7 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
         try {
             this.currentValue = this.previousValue / a.doubleValue();
             updateDisplay();
+            this.previousValue = this.currentValue;
         } 
         catch (ArithmeticException e) {
             // Handles division by zero
