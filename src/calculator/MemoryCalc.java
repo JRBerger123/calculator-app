@@ -34,6 +34,7 @@ public class MemoryCalc<N extends Number> extends Calculator<N> {
     /**
      * Clears the memory value.
      */
+    @SuppressWarnings("unused")
     void memoryClear() {
         this.memoryValue = 0.0;
     }
@@ -41,7 +42,7 @@ public class MemoryCalc<N extends Number> extends Calculator<N> {
     /**
      * Adds the current value to the memory value.
      */
-    @SuppressWarnings("unchecked") // Suppress unchecked cast warning for Number to N as memoryValue is of type double, a valid Number type.
+    @SuppressWarnings({"unchecked", "unused"}) // Suppress unchecked cast warning for Number to N as memoryValue is of type double, a valid Number type.
     void memoryAdd() {
         add((N)(Number) this.memoryValue);
     }
@@ -49,7 +50,7 @@ public class MemoryCalc<N extends Number> extends Calculator<N> {
     /**
      * Subtracts the current value from the memory value.
      */
-    @SuppressWarnings("unchecked") // Suppress unchecked cast warning for Number to N as memoryValue is of type double, a valid Number type.
+    @SuppressWarnings({"unchecked", "unused"}) // Suppress unchecked cast warning for Number to N as memoryValue is of type double, a valid Number type.
     void memorySubtract() {
         subtract((N)(Number) this.memoryValue);
     }
@@ -65,6 +66,7 @@ public class MemoryCalc<N extends Number> extends Calculator<N> {
     /**
      * Sets the memory value to the current value.
      */
+    @SuppressWarnings("unused") // Suppress unused warning for setMemoryValue method
     void setMemoryValue() {
         this.memoryValue = this.currentValue;
     }
