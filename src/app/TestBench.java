@@ -85,12 +85,37 @@ public class TestBench {
         }
 
 
-        if (calc instanceof AdvanceCalc) {
+        if (calc instanceof AdvanceCalc<?> ac) {
             String userInput = scanner.nextLine();
 
             System.out.println("Available operations: +, -, *, /, mem, sqrt, pow");
 
             switch (userInput) {
+                case "1", "add" -> {
+                    System.out.println("Enter number to add: ");
+                    double userVariable = scanner.nextDouble();
+                    ac.add(userVariable);
+
+                }
+
+                case "2", "subtract" -> {
+                    System.out.println("Enter number to subtract: ");
+                    userInput = scanner.nextLine();
+
+                }
+
+                case "3", "multiply" -> {
+                    System.out.println("Enter number to multiply: ");
+                    userInput = scanner.nextLine();
+
+                }
+
+                case "4", "divide" -> {
+                    System.out.println("Enter number to divide: ");
+                    userInput = scanner.nextLine();
+
+                }
+            }
                 case "5", "mem" -> displayMemoryOptions();
 
                 case "6", "sqrt" -> calc.sqrt();
