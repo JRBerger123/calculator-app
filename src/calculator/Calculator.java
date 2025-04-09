@@ -60,9 +60,9 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
      */
     @Override
     public void add(N a) {
-        this.operator = '+';
-
         try {
+            this.operator = '+';
+
             this.currentValue = this.previousValue + a.doubleValue();
             updateDisplay();
             this.previousValue = this.currentValue;
@@ -79,9 +79,9 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
      */
     @Override
     public void subtract(N a) {
-        this.operator = '-';
-
         try {
+            this.operator = '-';
+
             this.currentValue = this.previousValue - a.doubleValue();
             updateDisplay();
             this.previousValue = this.currentValue;
@@ -98,9 +98,9 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
      */
     @Override
     public void multiply(N a) {
-        this.operator = '*';
-        
         try {
+            this.operator = '*';
+
             this.currentValue = this.previousValue * a.doubleValue();
             updateDisplay();
             this.previousValue = this.currentValue;
@@ -117,9 +117,9 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
      */
     @Override
     public void divide(N a) {
-        this.operator = '/';
-
         try {
+            this.operator = '/';
+
             this.currentValue = this.previousValue / a.doubleValue();
             updateDisplay();
             this.previousValue = this.currentValue;
