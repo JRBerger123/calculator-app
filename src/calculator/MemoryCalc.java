@@ -1,5 +1,68 @@
 package calculator;
 
-public class MemoryCalc {
-    
+/**
+ * The {@code MemoryCalc} class extends the {@code Calculator} class and implements the {@code BasicMath} interface.
+ * It provides additional functionality for memory operations.
+ * <p>
+ * Methods available:
+ * <ul>
+ *    <li>{@link #displayMemoryValue()} - Displays the current memory value.</li>
+ *    <li>{@link #memoryClear()} - Clears the memory value.</li>
+ *    <li>{@link #memoryAdd()} - Adds the current value to the memory value.</li>
+ *    <li>{@link #memorySubtract()} - Subtracts the current value from the memory value.</li>
+ *    <li>{@link #getMemoryValue()} - Returns the current memory value.</li>
+ *    <li>{@link #setMemoryValue()} - Sets the memory value to the current value.</li>
+ * </ul>
+ * @param <N> the type of number (e.g., Integer, Double) that this class will work with
+ * @author Brandon Berger, ...
+ * @version 0.7
+ * @since 2025.04.08
+ * @see <a href="https://github.com/JRBerger123/Calculator-App">GitHub Repository</a>
+ * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
+ */
+public class MemoryCalc<N extends Number> extends Calculator<N> {
+    double memoryValue = 0.0;
+
+    /**
+     * Displays the current memory value.
+     */
+    void displayMemoryValue() {
+        System.out.println("Memory Value: " + memoryValue);
+    }
+
+    /**
+     * Clears the memory value.
+     */
+    void memoryClear() {
+        this.memoryValue = 0.0;
+    }
+
+    /**
+     * Adds the current value to the memory value.
+     */
+    void memoryAdd() {
+        this.currentValue += memoryValue;
+    }
+
+    /**
+     * Subtracts the current value from the memory value.
+     */
+    void memorySubtract() {
+        this.currentValue -= memoryValue;
+    }
+
+    /**
+     * Returns the current memory value.
+     * @return a double of the current memory value
+     */
+    double getMemoryValue() {
+        return memoryValue;
+    }
+
+    /**
+     * Sets the memory value to the current value.
+     */
+    void setMemoryValue() {
+        this.memoryValue = currentValue;
+    }
 }
