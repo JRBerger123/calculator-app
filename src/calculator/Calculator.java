@@ -48,7 +48,7 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
      */
     char operator = '+';
 
-    Calculator() {
+    public Calculator() {
         clear();
     }
 
