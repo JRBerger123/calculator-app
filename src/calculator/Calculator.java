@@ -48,6 +48,11 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
      */
     char operator = '+';
 
+    Calculator() {
+        clear();
+    }
+
+
     /**
      * Adds the input value to the previous value.
      * @param a the input value to be added
