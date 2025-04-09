@@ -69,7 +69,10 @@ public class TestBench {
                         ac.divide(divisor);
                     }
     
-                    case "5", "mem" -> displayMemoryOptions();
+                    case "5", "mem" -> {
+                        int optionSelected = displayMemoryOptions();
+                        handleMemoryOptions((AdvancedCalc) ac, optionSelected);
+                    }
     
                     case "6", "sqrt" -> ac.sqrt();
     
