@@ -89,6 +89,31 @@ public class Input {
 		return userInput;
 		
 	} // end of getInt
+
+    /**
+     * This method prompts for the user's input and verifies that the user input is a valid double.
+     * @param prompt is the message to display to the user when prompting for input
+     * @return the integer value entered by the user
+     */
+    public static int getDouble(String prompt) {
+    	int userInput;
+		
+		System.out.print(prompt);
+
+        // if the data in the buffer is a valid integer
+        // then break out of the validation loop
+        while (!Input.sc.hasNextDouble()) {
+
+            System.out.print("Invalid input! Please enter a double: ");
+            Input.sc.next();  // clear the data in the input buffer
+
+        }
+			
+		userInput = Input.sc.nextInt();
+		Input.sc.nextLine(); // consume newline left-over
+		
+		return userInput;
+	}
     
     /**
      * This method prompts for the user's input and verifies that the user input is a valid integer within a specified range.
