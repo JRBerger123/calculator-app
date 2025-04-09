@@ -12,13 +12,8 @@ public class TestBench {
     class AdvancedCalc extends AdvanceCalc<Double> {}
 
     public void setPrecision(Object calc) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.print("What would you like your calculator's decimal precision to be (0-10)? ");
-            int precision = scanner.nextInt();
-            
-            if (precision < 0 || precision > 10) {
-                throw new IllegalArgumentException("Precision must be between 0 and 10.");
-            }
+        try {
+            int precision = Input.getIntRange("What would you like your calculator's decimal precision to be (0-10)? ", 0, 10);
 
             if (calc instanceof AdvanceCalc<?> advanceCalc) {
                 @SuppressWarnings("unchecked")
@@ -34,39 +29,34 @@ public class TestBench {
     }
 
     public void run(Object calc) {
-        try (Scanner scanner = new Scanner(System.in)) {
+        try {
     
             if (calc instanceof AdvanceCalc<?> advancedCalc) {
                 // Explicit cast to AdvanceCalc<Double>
                 AdvanceCalc<Double> ac = (AdvanceCalc<Double>) advancedCalc;
     
                 System.out.println("Available operations: +, -, *, /, mem, sqrt, pow");
-                System.out.print("Enter an operation: ");
-                String userInput = scanner.nextLine();
+                String userInput = Input.getString("Enter an operation: ");
     
                 switch (userInput) {
                     case "1", "+", "add" -> {
-                        System.out.print("Enter the number to add: ");
-                        double addend = scanner.nextDouble();
-                        ac.add(addend);
+                        double val = Input.getDouble("Enter the number to add: ");
+                        ac.add(val);
                     }
     
                     case "2", "-", "subtract" -> {
-                        System.out.print("Enter the number to subtract: ");
-                        double subtrahend = scanner.nextDouble();
-                        ac.subtract(subtrahend);
+                        double val = Input.getDouble("Enter the number to subtract: ");
+                        ac.subtract(val);
                     }
     
                     case "3", "*", "multiply" -> {
-                        System.out.print("Enter the number to multiply: ");
-                        double multiplicand = scanner.nextDouble();
-                        ac.multiply(multiplicand);
+                        double val = Input.getDouble("Enter the number to multiply: ");
+                        ac.multiply(val);
                     }
     
                     case "4", "/", "divide" -> {
-                        System.out.print("Enter the number to divide: ");
-                        double divisor = scanner.nextDouble();
-                        ac.divide(divisor);
+                        double val = Input.getDouble("Enter the number to divide: ");
+                        ac.divide(val);
                     }
     
                     case "5", "mem" -> {
@@ -77,8 +67,7 @@ public class TestBench {
                     case "6", "sqrt" -> ac.sqrt();
     
                     case "7", "pow" -> {
-                        System.out.print("Enter the exponent: ");
-                        double exponent = scanner.nextDouble();
+                        double exponent = Input.getDouble("Enter the exponent: ");
                         ac.pow(exponent);
                     }
 
@@ -139,7 +128,7 @@ public class TestBench {
     public boolean promptAdvancedFeatures() {
         try (Scanner scanner = new Scanner(System.in)) {
             while(true) {
-                System.out.println("Would you like advanced Calculator features? ");
+                System.out.print("Would you like advanced Calculator features? ");
                 String userInput = scanner.nextLine();
 
                 switch (userInput) {
