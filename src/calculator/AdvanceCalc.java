@@ -1,6 +1,6 @@
 package calculator;
 
-    public abstract class AdvanceCalc<N extends Number> implements AdvanceMath<N> extends MemoryCalc {
+    public abstract class AdvanceCalc<N extends Number> extends MemoryCalc<N> implements AdvanceMath<N> {
         int precision = 0;
 
 
