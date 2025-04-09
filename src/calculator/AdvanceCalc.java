@@ -14,12 +14,13 @@ package calculator;
         @Override
         public void sqrt() {
             try {
-                if (inputValue.doubleValue() < 0) {
+                if (inputValue < 0) {
                     System.out.println("Cannot take square root of a negative number.");
                     return;
                 }
-                currentValue = Math.sqrt(inputValue.doubleValue());
+                this.currentValue = Math.sqrt(inputValue);
                 updateDisplay();
+                this.previousValue = this.currentValue;
             }
             catch (Exception e) {
                 System.out.println("Cannot take square root of a negative number.");
@@ -35,6 +36,8 @@ package calculator;
         public void pow(N a){
             try {
                 this.currentValue = Math.pow(this.inputValue, a.doubleValue());
+                updateDisplay();
+                this.previousValue = this.currentValue;
             }
             catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
@@ -47,7 +50,7 @@ package calculator;
         }
 
         public void displayMemoryValue(){
-            super.diplayMemoryValue();
+            super.displayMemoryValue();
         }
 
         /**
