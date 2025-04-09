@@ -19,7 +19,7 @@ package calculator;
         * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
         * @see <a href="https://github.com/Miz-Bl">Micahel Szigethy's GitHub</a>
         */
-public interface AdvanceMath <N extends Number>{
+public interface AdvanceMath <N extends Number> {
 
     /**
      * square roots the input value.
