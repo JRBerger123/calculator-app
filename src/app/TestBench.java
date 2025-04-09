@@ -1,10 +1,8 @@
 package app;
 
-import java.util.Scanner;
-
 import calculator.AdvanceCalc;
 import calculator.Calculator;
-import calculator.MemoryCalc;
+import java.util.Scanner;
 
 
 
@@ -17,14 +15,17 @@ public class TestBench {
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("What would you like your calculator's decimal precision to be (0-10)? ");
             int precision = scanner.nextInt();
+            
             if (precision < 0 || precision > 10) {
                 throw new IllegalArgumentException("Precision must be between 0 and 10.");
             }
 
-            if (calc instanceof AdvanceCalc<?> ac) { // Required to use subclass method of setPrecision
+            if (calc instanceof AdvanceCalc<?> advanceCalc) {
+                @SuppressWarnings("unchecked")
+                AdvanceCalc<Double> ac = (AdvanceCalc<Double>) advanceCalc; // Explicitly cast to AdvanceCalc<Double>
                 ac.setPrecision(precision);
             }
-            
+
             System.out.println("Decimal precision set to: " + precision);
         } 
         catch (IllegalArgumentException e) {
@@ -32,8 +33,104 @@ public class TestBench {
         }
     }
 
-    public void run() {
-        //...
+    public void run(Object calc) {
+        try (Scanner scanner = new Scanner(System.in)) {
+    
+            if (calc instanceof AdvanceCalc<?> advancedCalc) {
+                // Explicit cast to AdvanceCalc<Double>
+                AdvanceCalc<Double> ac = (AdvanceCalc<Double>) advancedCalc;
+    
+                System.out.println("Available operations: +, -, *, /, mem, sqrt, pow");
+                System.out.print("Enter an operation: ");
+                String userInput = scanner.nextLine();
+    
+                switch (userInput) {
+                    case "1", "+", "add" -> {
+                        System.out.print("Enter the number to add: ");
+                        double addend = scanner.nextDouble();
+                        ac.add(addend);
+                    }
+    
+                    case "2", "-", "subtract" -> {
+                        System.out.print("Enter the number to subtract: ");
+                        double subtrahend = scanner.nextDouble();
+                        ac.subtract(subtrahend);
+                    }
+    
+                    case "3", "*", "multiply" -> {
+                        System.out.print("Enter the number to multiply: ");
+                        double multiplicand = scanner.nextDouble();
+                        ac.multiply(multiplicand);
+                    }
+    
+                    case "4", "/", "divide" -> {
+                        System.out.print("Enter the number to divide: ");
+                        double divisor = scanner.nextDouble();
+                        ac.divide(divisor);
+                    }
+    
+                    case "5", "mem" -> displayMemoryOptions();
+    
+                    case "6", "sqrt" -> ac.sqrt();
+    
+                    case "7", "pow" -> {
+                        System.out.print("Enter the exponent: ");
+                        double exponent = scanner.nextDouble();
+                        ac.pow(exponent);
+                    }
+
+                    case "exit" -> {
+                        System.out.println("Exiting the calculator. Goodbye!");
+                        return; // Exit the method to stop further execution
+                    }
+    
+                    default -> System.out.println("Invalid operation. Please try again.");
+                }
+    
+            } else if (calc instanceof Calculator<?> calculator) {
+                // Explicit cast to Calculator<Double>
+                Calculator<Double> bc = (Calculator<Double>) calculator;
+
+                System.out.println("Available operations: +, -, *, /, mem");
+                System.out.print("Enter an operation: ");
+                String userInput = scanner.nextLine();
+
+                switch (userInput) {
+                    case "1", "+", "add" -> {
+                        System.out.print("Enter the number to add: ");
+                        double addend = scanner.nextDouble();
+                        bc.add(addend);
+                    }
+    
+                    case "2", "-", "subtract" -> {
+                        System.out.print("Enter the number to subtract: ");
+                        double subtrahend = scanner.nextDouble();
+                        bc.subtract(subtrahend);
+                    }
+    
+                    case "3", "*", "multiply" -> {
+                        System.out.print("Enter the number to multiply: ");
+                        double multiplicand = scanner.nextDouble();
+                        bc.multiply(multiplicand);
+                    }
+    
+                    case "4", "/", "divide" -> {
+                        System.out.print("Enter the number to divide: ");
+                        double divisor = scanner.nextDouble();
+                        bc.divide(divisor);
+                    }
+
+                    case "exit" -> {
+                        System.out.println("Exiting the calculator. Goodbye!");
+                        return; // Exit the method to stop further execution
+                    }
+    
+                    default -> System.out.println("Invalid operation. Please try again.");
+                }
+            }    
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter a valid number.");
+        }
     }
 
     public boolean promptAdvancedFeatures() {
@@ -59,86 +156,20 @@ public class TestBench {
         }
     }
 
-    public void welcomePrompt(Object calc) {
-        Scanner scanner = new Scanner(System.in);
-
+    public void welcomePrompt() {
         System.out.println("Welcome to the Calculator App!");
         System.out.println("This app allows you to perform arithmetic operations.");
+    }
 
-        if (calc instanceof AdvanceCalc) {
-        System.out.println("You are using the Advanced Calculator.");
-
-
-        // Validate user input
-        while (true) {
-            try {
-                int userInput = Integer.parseInt(scanner.nextLine());
-                if (userInput >= 0 && userInput <= 10) {
-                    setPrecision(userInput);
-                    break;
-                } else {
-                    System.out.print("Please enter a Integer between 0 and 10, inclusive: ");
-                }
-            } catch (NumberFormatException e) {
-                System.out.print("Invalid input. Please enter an Integer between 0 and 10, inclusive: ");
-            }
+    public static void handleMemoryOptions(AdvancedCalc calc, int option) {
+        switch (option) {
+            case 1 -> calc.displayMemoryValue();
+            case 2 -> calc.memoryClear();
+            case 3 -> calc.memoryAdd();
+            case 4 -> calc.memorySubtract();
+            case 5 -> calc.setMemoryValue();
+            default -> System.out.println("Invalid option. Please select a number between 1 and 5.");
         }
-
-
-        if (calc instanceof AdvanceCalc<?> ac) {
-            String userInput = scanner.nextLine();
-
-            System.out.println("Available operations: +, -, *, /, mem, sqrt, pow");
-
-            switch (userInput) {
-                case "1", "add" -> {
-                    System.out.println("Enter number to add: ");
-                    double userVariable = scanner.nextDouble();
-                    ac.add(userVariable);
-
-                }
-
-                case "2", "subtract" -> {
-                    System.out.println("Enter number to subtract: ");
-                    userInput = scanner.nextLine();
-
-                }
-
-                case "3", "multiply" -> {
-                    System.out.println("Enter number to multiply: ");
-                    userInput = scanner.nextLine();
-
-                }
-
-                case "4", "divide" -> {
-                    System.out.println("Enter number to divide: ");
-                    userInput = scanner.nextLine();
-
-                }
-            }
-                case "5", "mem" -> displayMemoryOptions();
-
-                case "6", "sqrt" -> calc.sqrt();
-
-                case "7", "pow" -> {
-                    System.out.print("Enter the exponent: ");
-                    double exponent = scanner.nextDouble();
-                    calc.pow(exponent);
-                }
-
-                default -> System.out.println("Invalid operation. Please try again.");
-            }
-            
-        } 
-        else if (calc instanceof MemoryCalc) {
-            String userInput = scanner.nextLine();
-
-            System.out.println("Available operations: +, -, *, /, mem");
-
-
-        }
-        
-        System.out.println("Type 'exit' to quit the application.");
     }
 
     public static int displayMemoryOptions() {
@@ -149,29 +180,35 @@ public class TestBench {
         System.out.println("4. Memory Subtract");
         System.out.println("5. Set Memory Value");
         System.out.print("Select an option (1-5): ");
-        Scanner scanner = new Scanner(System.in);
-        try {
-        return scanner.nextInt();
-        } catch (Exception e) {
-            System.out.println("Invalid input. Please enter an Integer between 1 and 5.");
-            return -1; // Return an invalid option
+
+        while (true) {
+            try (Scanner scanner = new Scanner(System.in)) {
+                int option = scanner.nextInt();
+
+                if (option < 1 || option > 5) {
+                    System.out.println("Invalid option. Please select a number between 1 and 5.");
+                    return -1; // Return an invalid option
+                } else {
+                    return option;
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input. Please enter an Integer between 1 and 5.");
+            }
         }
     }
 
     public static void main(String[] args) {
         TestBench testBench = new TestBench();
 
+        testBench.welcomePrompt();
+
         if (testBench.promptAdvancedFeatures()) {
             AdvancedCalc calculator = testBench.new AdvancedCalc();
-            welcomePrompt(calculator);
+            testBench.setPrecision(calculator);
+            testBench.run(calculator);
         } else {
             BasicCalc calculator = testBench.new BasicCalc();
+            testBench.run(calculator);
         }
-
-        try (Scanner scanner = new Scanner(System.in)) {
-            testBench.welcomePrompt(args);
-        }
-
-        testBench.run();
     }
 }
