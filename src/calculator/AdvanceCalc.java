@@ -3,13 +3,22 @@ package calculator;
     public abstract class AdvanceCalc<N extends Number> extends MemoryCalc<N> implements AdvanceMath<N> {
         int precision = 0;
 
-
+        /**
+         * Default constructor for the {@code AdvanceCalc} class.
+         *
+         * <p>Initializes an instance of the {@code AdvanceCalc} class.
+         */
         public AdvanceCalc() {
 
         }
 
         /**
-         * square roots the input value.
+         * Calculates the square root of the current input value.
+         *
+         * <p>The method also updates the display of the current state by calling
+         * {@link #updateDisplay()} and sets {@code previousValue} to the result.</p>
+         *
+         * @throws IllegalArgumentException if {@code inputValue} is negative
          */
         @Override
         public void sqrt() {
@@ -25,7 +34,6 @@ package calculator;
             catch (Exception e) {
                 System.out.println("Cannot take square root of a negative number.");
             }
-
         }
 
         /**
@@ -44,12 +52,24 @@ package calculator;
             }
         }
 
+        /**
+         * Sets the precision value for calculations.
+         *
+         * @param p the precision value to be set, as int
+         */
         public void setPrecision(int p){
             this.precision = p;
             System.out.println("Precision set to " + precision);
         }
 
-        public void displayMemoryValue(){
+        /**
+         * Displays the current value stored in memory.
+         *
+         * <p>Calls the parent class's {@code displayMemoryValue()}
+         * method to handle the memory display functionality.</p>
+         */
+        @Override
+        public void displayMemoryValue() {
             super.displayMemoryValue();
         }
 
@@ -67,6 +87,4 @@ package calculator;
 
             System.out.println(formattedPreviousValue + " " + operator + " " + formattedInputValue + " = " + formattedCurrentValue);
         }
-
-
     }
