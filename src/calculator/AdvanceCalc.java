@@ -23,6 +23,7 @@ package calculator;
         @Override
         public void sqrt() {
             try {
+                this.operator = '\u221A';
                 if (inputValue < 0) {
                     System.out.println("Cannot take square root of a negative number.");
                     return;
@@ -43,6 +44,7 @@ package calculator;
         @Override
         public void pow(N a){
             try {
+                this.operator = '^';
                 this.currentValue = Math.pow(this.inputValue, a.doubleValue());
                 updateDisplay();
                 this.previousValue = this.currentValue;
