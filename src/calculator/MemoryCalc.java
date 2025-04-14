@@ -1,7 +1,7 @@
 package calculator;
 
 /**
- * The {@code MemoryCalc} class extends the {@code Calculator} class and implements the {@code BasicMath} interface.
+ * The {@link MemoryCalc} class extends the {@link Calculator} class and implements the {@link BasicMath} interface.
  * It provides additional functionality for memory operations.
  * <p>
  * Methods available:
@@ -13,7 +13,8 @@ package calculator;
  *    <li>{@link #getMemoryValue()} - Returns the current memory value.</li>
  *    <li>{@link #setMemoryValue()} - Sets the memory value to the current value.</li>
  * </ul>
- * @param <N> the type of number (e.g., Integer, Double) that this class will work with
+ * </p>
+ * 
  * @author Brandon Berger, Michael Szigethy
  * @version 1.0
  * @since 2025.04.08
@@ -23,13 +24,13 @@ package calculator;
  */
 public class MemoryCalc extends Calculator {
     /**
-     * Represents the memory value stored for the memory key funciton.
+     * Represents the memory value stored for the use of memory operations.
      */
     private double memoryValue = 0.0;
 
     /**
-     * Default constructor for the {@code MemoryCalc} class.
-     * <p>Initializes an instance of the {@code MemoryCalc} class.</p>
+     * Default constructor for the {@link MemoryCalc} class.
+     * <p>Initializes an instance of the {@link MemoryCalc} class.</p>
      */
     public MemoryCalc() {
         super(); // Call the constructor of the parent class (Calculator)
@@ -50,15 +51,16 @@ public class MemoryCalc extends Calculator {
     /**
      * Clears the memory value.
      */
-    @SuppressWarnings("unused")
     public final void memoryClear() {
         this.memoryValue = 0.0;
     }
 
     /**
      * Adds the current value to the memory value.
+     * <p>Note: This method suppresses unchecked cast warnings.</p>
+     * @param <N> N is the type of the number to be added to memory
      */
-    @SuppressWarnings({"unchecked", "unused"}) // Suppress unchecked cast warning for Number to N as memoryValue is of type double, a valid Number type.
+    @SuppressWarnings({"unchecked"}) // Suppress unchecked cast warning for Number to N as memoryValue is of type double, a valid Number type.
     public <N extends Number> void memoryAdd() {
         if (memoryValue == 0.0) {
             System.out.println("Memory not set");
@@ -69,8 +71,10 @@ public class MemoryCalc extends Calculator {
 
     /**
      * Subtracts the current value from the memory value.
+     * <p>Note: This method suppresses unchecked cast warnings.</p>
+     * @param <N> N is the type of the number to be subtracted from memory
      */
-    @SuppressWarnings({"unchecked", "unused"}) // Suppress unchecked cast warning for Number to N as memoryValue is of type double, a valid Number type.
+    @SuppressWarnings({"unchecked"}) // Suppress unchecked cast warning for Number to N as memoryValue is of type double, a valid Number type.
     public <N extends Number> void memorySubtract() {
         if (memoryValue == 0.0) {
             System.out.println("Memory not set");
@@ -90,7 +94,6 @@ public class MemoryCalc extends Calculator {
     /**
      * Sets the memory value to the current value.
      */
-    @SuppressWarnings("unused") // Suppress unused warning for setMemoryValue method
     public void setMemoryValue() {
         this.memoryValue = this.currentValue;
     }

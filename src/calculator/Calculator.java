@@ -1,8 +1,8 @@
 package calculator;
 
 /**
- * The {@code Calculator} class represents a calculator object. <p>
- * The {@code Calculator} class implements the {@code BasicMath} interface and defines the following methods:
+ * The {@link Calculator} class represents a calculator object. <p>
+ * The {@link Calculator} class implements the {@link BasicMath} interface and defines the following methods:
  * <ul>
  *      <li>void add(N)</li>
  *      <li>void subtract(N)</li>
@@ -11,16 +11,16 @@ package calculator;
  * </ul>
  * Methods available:
  * <ul>
- *      <li>{@link #add(N)} - Adds two variables.</li>
- *      <li>{@link #subtract(N)} - Subtracts two variables.</li>
- *      <li>{@link #multiply(N)} - Multiplies two variables.</li>
- *      <li>{@link #divide(N)} - Divides two variables.</li>
+ *      <li>{@link #add(N)} - Adds a variable to {@link #previousValue} using double operation logic.</li>
+ *      <li>{@link #subtract(N)} - Subtracts a variable to {@link #previousValue} using double operation logic.</li>
+ *      <li>{@link #multiply(N)} - Multiplies a variable to {@link #previousValue} using double operation logic.</li>
+ *      <li>{@link #divide(N)} - Divides a variable to {@link #previousValue} using double operation logic.</li>
  *      <li>{@link #clear()} - Clears class attributes.</li>
- *      <li>{@link #updateDisplay()} - Displays what mathematical operation happened and the results.</li>
+ *      <li>{@link #updateDisplay()} - Displays the mathematical operation and the results.</li>
  * </ul>
  *
  * @author Brandon Berger, Michahel Szigethy
- * @version 0.8
+ * @version 1.0
  * @since 2025.04.07
  * @see <a href="https://github.com/JRBerger123/Calculator-App">GitHub Repository</a>
  * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
@@ -57,6 +57,7 @@ public abstract class Calculator implements BasicMath {
     /**
      * Adds the input value to the previous value.
      * @param a the input value to be added
+     * @param <N> N is the type of number (e.g., Integer, Double) that this method will work with
      */
     @Override
     public <N extends Number> void add(N a) {
@@ -76,6 +77,7 @@ public abstract class Calculator implements BasicMath {
     /**
      * Subtracts the input value from the previous value.
      * @param a the input value to be subtracted
+     * @param <N> N is the type of number (e.g., Integer, Double) that this method will work with
      */
     @Override
     public <N extends Number> void subtract(N a) {
@@ -95,6 +97,7 @@ public abstract class Calculator implements BasicMath {
     /**
      * Multiplies the input value with the previous value.
      * @param a the input value to be multiplied
+     * @param <N> N is the type of number (e.g., Integer, Double) that this method will work with
      */
     @Override
     public <N extends Number> void multiply(N a) {
@@ -114,6 +117,7 @@ public abstract class Calculator implements BasicMath {
     /**
      * Divides the previous value by the input value.
      * @param a the input value to divide by
+     * @param <N> N is the type of number (e.g., Integer, Double) that this method will work with
      */
     @Override
     public <N extends Number> void divide(N a) {
@@ -135,7 +139,7 @@ public abstract class Calculator implements BasicMath {
     }
 
     /**
-     * Clears the calculator's previous and current values, input value, and operator.
+     * Clears the calculator's previous and current values, input value, and operator by setting default values to each.
      */
     public final void clear() {
         this.previousValue = 0.0;

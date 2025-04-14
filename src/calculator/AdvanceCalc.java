@@ -1,7 +1,7 @@
 package calculator;
 
 /**
- * The {@code AdvanceCalc} class extends the {@code MemoryCalc} class and implements the {@code AdvanceMath} interface.
+ * The {@link AdvanceCalc} class extends the {@link MemoryCalc} class and implements the {@link AdvanceMath} interface.
  * It provides additional functionality for advanced mathematical operations.
  * <p>
  * Methods available:
@@ -13,7 +13,7 @@ package calculator;
  *   <li>{@link #updateDisplay()} - Updates the display with the current operation and result.</li>
  * </ul>
  * <p>
- * @param <N> the type of number (e.g., Integer, Double) that this class will work with
+ * 
  * @author Brandon Berger, Michael Szigethy
  * @version 1.0
  * @since 2025.04.08
@@ -29,9 +29,9 @@ public abstract class AdvanceCalc extends MemoryCalc implements AdvanceMath {
     int precision = 0;
 
     /**
-     * Default constructor for the {@code AdvanceCalc} class.
+     * Default constructor for the {@link AdvanceCalc} class.
      *
-     * <p>Initializes an instance of the {@code AdvanceCalc} class.
+     * <p>Initializes the fields for an instance of the {@link AdvanceCalc} class.
      */
     public AdvanceCalc() {
         super(); // Call the constructor of the parent class (MemoryCalc)
@@ -42,16 +42,14 @@ public abstract class AdvanceCalc extends MemoryCalc implements AdvanceMath {
      * Calculates the square root of the current input value.
      *
      * <p>The method also updates the display of the current state by calling
-     * {@link #updateDisplay()} and sets {@code previousValue} to the result.</p>
-     *
-     * @throws IllegalArgumentException if {@code inputValue} is negative
+     * {@link #updateDisplay()} and sets {@link Calculator#previousValue previousValue} to the result.</p>
      */
     @Override
     public void sqrt() {
         try {
             this.operator = '\u221A';
             if (inputValue < 0) {
-                System.out.println("Cannot take square root of a negative number.");
+                System.out.println("Error: cannot take square root of a negative number.");
                 return;
             }
             this.currentValue = Math.sqrt(inputValue);
@@ -65,7 +63,9 @@ public abstract class AdvanceCalc extends MemoryCalc implements AdvanceMath {
 
     /**
      *  Uses input value as an exponent value.
+     * 
      * @param a is the exponent
+     * @param <N> N is the type of number (e.g., Integer, Double) that this method will work with
      */
     @Override
     public <N extends Number> void pow(N a){
@@ -93,7 +93,7 @@ public abstract class AdvanceCalc extends MemoryCalc implements AdvanceMath {
     /**
      * Displays the current value stored in memory.
      *
-     * <p>Calls the parent class's {@code displayMemoryValue()}
+     * <p>Calls the parent class's {@link MemoryCalc#displayMemoryValue() displayMemoryValue()}
      * method to handle the memory display functionality.</p>
      */
     @Override
@@ -107,12 +107,11 @@ public abstract class AdvanceCalc extends MemoryCalc implements AdvanceMath {
      */
     @Override
     public void updateDisplay() {
-        String format = "%." + precision + "f";
-
-        String formattedPreviousValue = String.format(format, previousValue);
-        String formattedCurrentValue = String.format(format, currentValue);
-        String formattedInputValue = String.format(format, inputValue);
-
-        System.out.println(formattedPreviousValue + " " + operator + " " + formattedInputValue + " = " + formattedCurrentValue);
+        if (this.operator != '\0') {
+            String format = "%." + precision + "f";
+            System.out.println(String.format(format + " %s " + format + " = " + format, this.previousValue, this.operator, this.inputValue, this.currentValue));
+        } else {
+            System.out.println("No operation performed yet.");
+        }
     }
 }
