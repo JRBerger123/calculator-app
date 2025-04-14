@@ -21,13 +21,29 @@ package calculator;
  * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
  * @see <a href="https://github.com/Miz-Bl">Micahel Szigethy's GitHub</a>
  */
-public class MemoryCalc<N extends Number> extends Calculator<N> {
-    double memoryValue = 0.0;
+public class MemoryCalc extends Calculator {
+    /**
+     * Represents the memory value stored for the memory key funciton.
+     */
+    private double memoryValue = 0.0;
+
+    /**
+     * Default constructor for the {@code MemoryCalc} class.
+     * <p>Initializes an instance of the {@code MemoryCalc} class.</p>
+     */
+    public MemoryCalc() {
+        super(); // Call the constructor of the parent class (Calculator)
+        memoryClear();
+    }
 
     /**
      * Displays the current memory value.
      */
     public void displayMemoryValue() {
+        if (memoryValue == 0.0) {
+            System.out.println("Memory not set");
+            return;
+        }
         System.out.println("Memory Value: " + getMemoryValue());
     }
 
@@ -35,7 +51,7 @@ public class MemoryCalc<N extends Number> extends Calculator<N> {
      * Clears the memory value.
      */
     @SuppressWarnings("unused")
-    public void memoryClear() {
+    public final void memoryClear() {
         this.memoryValue = 0.0;
     }
 
@@ -43,7 +59,11 @@ public class MemoryCalc<N extends Number> extends Calculator<N> {
      * Adds the current value to the memory value.
      */
     @SuppressWarnings({"unchecked", "unused"}) // Suppress unchecked cast warning for Number to N as memoryValue is of type double, a valid Number type.
-    public void memoryAdd() {
+    public <N extends Number> void memoryAdd() {
+        if (memoryValue == 0.0) {
+            System.out.println("Memory not set");
+            return;
+        }
         add((N)(Number) this.memoryValue);
     }
 
@@ -51,7 +71,11 @@ public class MemoryCalc<N extends Number> extends Calculator<N> {
      * Subtracts the current value from the memory value.
      */
     @SuppressWarnings({"unchecked", "unused"}) // Suppress unchecked cast warning for Number to N as memoryValue is of type double, a valid Number type.
-    public void memorySubtract() {
+    public <N extends Number> void memorySubtract() {
+        if (memoryValue == 0.0) {
+            System.out.println("Memory not set");
+            return;
+        }
         subtract((N)(Number) this.memoryValue);
     }
 

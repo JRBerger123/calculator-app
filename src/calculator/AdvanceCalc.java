@@ -21,7 +21,11 @@ package calculator;
  * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
  * @see <a href="https://github.com/Miz-Bl">Micahel Szigethy's GitHub</a>
  */
-public abstract class AdvanceCalc<N extends Number> extends MemoryCalc<N> implements AdvanceMath<N> {
+public abstract class AdvanceCalc extends MemoryCalc implements AdvanceMath {
+    /**
+     * Represents the precision to be shown in each calculation.
+     * <p>Default value is 0, which means no decimal places.</p>
+     */
     int precision = 0;
 
     /**
@@ -63,7 +67,7 @@ public abstract class AdvanceCalc<N extends Number> extends MemoryCalc<N> implem
      * @param a is the exponent
      */
     @Override
-    public void pow(N a){
+    public <N extends Number> void pow(N a){
         try {
             this.operator = '^';
             this.currentValue = Math.pow(this.inputValue, a.doubleValue());
@@ -82,7 +86,7 @@ public abstract class AdvanceCalc<N extends Number> extends MemoryCalc<N> implem
      */
     public void setPrecision(int p){
         this.precision = p;
-        System.out.println("Precision set to " + precision);
+        System.out.println("Precision set to " + this.precision + " decimal places.");
     }
 
     /**
