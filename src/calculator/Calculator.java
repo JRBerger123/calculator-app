@@ -126,7 +126,7 @@ public abstract class Calculator implements BasicMath {
         } 
         catch (ArithmeticException e) {
             // Handles division by zero
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error, tried to divide by zero: " + e.getMessage());
         } 
         catch (Exception e) {
             // Handles any other exceptions that may occur
@@ -138,10 +138,10 @@ public abstract class Calculator implements BasicMath {
      * Clears the calculator's previous and current values, input value, and operator.
      */
     public final void clear() {
-        previousValue = 0.0;
-        currentValue = 0.0;
-        inputValue = 0.0;
-        operator = '+';
+        this.previousValue = 0.0;
+        this.currentValue = 0.0;
+        this.inputValue = 0.0;
+        this.operator = '\0';
     }
 
     /**
@@ -149,6 +149,10 @@ public abstract class Calculator implements BasicMath {
      * This method is called after each operation to show the result.
      */
     protected void updateDisplay() {
-        System.out.println(previousValue + " " + operator + " " + inputValue + " = " + currentValue);
+        if (this.operator != '\0') {
+            System.out.println(this.previousValue + " " + this.operator + " " + this.inputValue + " = " + this.currentValue);
+        } else {
+            System.out.println("Cannot update display. No operation performed yet.");
+        }
     }
 }
