@@ -34,7 +34,8 @@ public abstract class AdvanceCalc extends MemoryCalc implements AdvanceMath {
      * <p>Initializes an instance of the {@code AdvanceCalc} class.
      */
     public AdvanceCalc() {
-
+        super(); // Call the constructor of the parent class (MemoryCalc)
+        this.precision = 0; // Default precision is set to 0 decimal places
     }
 
     /**
