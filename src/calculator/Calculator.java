@@ -26,7 +26,7 @@ package calculator;
  * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
  * @see <a href="https://github.com/Miz-Bl">Micahel Szigethy's GitHub</a>
  */
-public abstract class Calculator<N extends Number> implements BasicMath<N> {
+public abstract class Calculator implements BasicMath {
     /**
      * Represents the previous value of the calculator.
      */
@@ -59,7 +59,7 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
      * @param a the input value to be added
      */
     @Override
-    public void add(N a) {
+    public <N extends Number> void add(N a) {
         try {
             this.operator = '+';
 
@@ -78,7 +78,7 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
      * @param a the input value to be subtracted
      */
     @Override
-    public void subtract(N a) {
+    public <N extends Number> void subtract(N a) {
         try {
             this.operator = '-';
 
@@ -97,7 +97,7 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
      * @param a the input value to be multiplied
      */
     @Override
-    public void multiply(N a) {
+    public <N extends Number> void multiply(N a) {
         try {
             this.operator = '*';
 
@@ -116,7 +116,7 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
      * @param a the input value to divide by
      */
     @Override
-    public void divide(N a) {
+    public <N extends Number> void divide(N a) {
         try {
             this.operator = '/';
 
@@ -148,7 +148,7 @@ public abstract class Calculator<N extends Number> implements BasicMath<N> {
      * Updates the display with the current operation and result.
      * This method is called after each operation to show the result.
      */
-    public void updateDisplay() {
+    protected void updateDisplay() {
         System.out.println(previousValue + " " + operator + " " + inputValue + " = " + currentValue);
     }
 }

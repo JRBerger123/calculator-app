@@ -20,28 +20,28 @@ package calculator;
  * @see <a href="https://github.com/JRBerger123/Calculator-App">GitHub Repository</a>
  * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
  */
-public interface BasicMath <N extends Number> {
+public interface BasicMath {
     /**
      * Adds the input value to the previous value.
      * @param a the input value to be added
      */
-    void add(N a);
+    <N extends Number> void add(N a);
 
     /**
      * Subtracts the input value from the previous value.
      * @param a the input value to be subtracted
      */
-    void subtract(N a);
+    <N extends Number> void subtract(N a);
 
     /**
      * Multiplies the input value with the previous value.
      * @param a the input value to be multiplied
      */
-    void multiply(N a);
+    <N extends Number> void multiply(N a);
 
     /**
      * Divides the previous value by the input value.
      * @param a the input value to be divided
      */
-    void divide(N a);
+    <N extends Number> void divide(N a);
 }

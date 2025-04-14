@@ -27,7 +27,7 @@ public class MemoryCalc<N extends Number> extends Calculator<N> {
     /**
      * Displays the current memory value.
      */
-    void displayMemoryValue() {
+    public void displayMemoryValue() {
         System.out.println("Memory Value: " + getMemoryValue());
     }
 
@@ -59,7 +59,7 @@ public class MemoryCalc<N extends Number> extends Calculator<N> {
      * Returns the current memory value.
      * @return a double of the current memory value
      */
-    public double getMemoryValue() {
+    protected double getMemoryValue() {
         return this.memoryValue;
     }
 
