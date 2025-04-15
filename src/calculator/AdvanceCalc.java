@@ -1,4 +1,5 @@
 package calculator;
+import app.TextColor;
 
 /**
  * The {@link AdvanceCalc} class extends the {@link MemoryCalc} class and implements the {@link AdvanceMath} interface.
@@ -6,11 +7,13 @@ package calculator;
  * <p>
  * Methods available:
  * <ul>
+ *   <li>{@link #AdvanceCalc()} - Initializes an instance of the {@link AdvanceCalc} class.</li>
  *   <li>{@link #sqrt()} - Calculates the square root of the current input value.</li>
  *   <li>{@link #pow(N)} - Raises the current input value to the power of the given exponent.</li>
  *   <li>{@link #setPrecision(int)} - Sets the precision for calculations.</li>
  *   <li>{@link #displayMemoryValue()} - Displays the current memory value.</li>
  *   <li>{@link #updateDisplay()} - Updates the display with the current operation and result.</li>
+ *   <li>{@link #updateDisplay(boolean)} - Updates the display with the current operation and result, with an option to use the first variable.</li>
  * </ul>
  * <p>
  * 
@@ -24,9 +27,8 @@ package calculator;
 public abstract class AdvanceCalc extends MemoryCalc implements AdvanceMath {
     /**
      * Represents the precision to be shown in each calculation.
-     * <p>Default value is 0, which means no decimal places.</p>
      */
-    int precision = 0;
+    private int precision;
 
     /**
      * Default constructor for the {@link AdvanceCalc} class.
@@ -48,16 +50,18 @@ public abstract class AdvanceCalc extends MemoryCalc implements AdvanceMath {
     public void sqrt() {
         try {
             this.operator = '\u221A';
-            if (inputValue < 0) {
-                System.out.println("Error: cannot take square root of a negative number.");
+
+            if (this.inputValue < 0) {
+                System.out.println(TextColor.RED.colorize("Cannot take square root of a negative number."));
                 return;
             }
-            this.currentValue = Math.sqrt(inputValue);
-            updateDisplay();
+
+            this.currentValue = Math.sqrt(this.previousValue);
+            updateDisplay(false);
             this.previousValue = this.currentValue;
         }
         catch (Exception e) {
-            System.out.println("Cannot take square root of a negative number.");
+            System.out.println(TextColor.RED.colorize("Error: " + e.getMessage() + "\n"));
         }
     }
 
@@ -71,7 +75,9 @@ public abstract class AdvanceCalc extends MemoryCalc implements AdvanceMath {
     public <N extends Number> void pow(N a){
         try {
             this.operator = '^';
-            this.currentValue = Math.pow(this.inputValue, a.doubleValue());
+
+            this.inputValue = a.doubleValue();
+            this.currentValue = Math.pow(this.previousValue, a.doubleValue());
             updateDisplay();
             this.previousValue = this.currentValue;
         }
@@ -87,7 +93,7 @@ public abstract class AdvanceCalc extends MemoryCalc implements AdvanceMath {
      */
     public void setPrecision(int p){
         this.precision = p;
-        System.out.println("Precision set to " + this.precision + " decimal places.");
+        System.out.println(TextColor.CYAN.colorize("\tPrecision set to " + this.precision + " decimal places.\n"));
     }
 
     /**
@@ -98,20 +104,35 @@ public abstract class AdvanceCalc extends MemoryCalc implements AdvanceMath {
      */
     @Override
     public void displayMemoryValue() {
-        super.displayMemoryValue();
+        String format = "%." + this.precision + "f";
+        System.out.println(TextColor.YELLOW.colorize(String.format("Memory Value: " + format, getMemoryValue())));
     }
 
     /**
      * Updates the display with the current operation and result.
-     * This method is called after each operation to show the result.
+     * <p>This method is called after each operation to show the result.</p>
      */
     @Override
     public void updateDisplay() {
+        updateDisplay(true);
+    }
+
+    /**
+     * Updates the display with the current operation and result.
+     * <p>This method is called after each operation to show the result.</p>
+     *
+     * @param useFirstVariable boolean value to determine if the first variable should be used in the display
+     */
+    public void updateDisplay(boolean useFirstVariable) {
         if (this.operator != '\0') {
-            String format = "%." + precision + "f";
-            System.out.println(String.format(format + " %s " + format + " = " + format, this.previousValue, this.operator, this.inputValue, this.currentValue));
+            String format = "%." + this.precision + "f";
+            if (useFirstVariable) {
+                System.out.println(TextColor.GREEN.colorize(String.format(format + " %s " + format + " = " + format, this.previousValue, this.operator, this.inputValue, this.currentValue)));
+            } else {
+                System.out.println(TextColor.GREEN.colorize(String.format("%s " + format + " = " + format, this.operator, this.previousValue, this.currentValue)));
+            }
         } else {
-            System.out.println("No operation performed yet.");
+            System.out.println(TextColor.RED.colorize("No operation performed yet."));
         }
     }
 }

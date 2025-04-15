@@ -1,0 +1,101 @@
+@startuml "Class Diagram"
+abstract class AdvanceCalc {
+    - precision: int
+	--
+    + AdvanceCalc()
+    + sqrt(): void
+    + <N extends Number> pow(a: N): void
+    + setPrecision(p: int): void
+    + displayMemoryValue(): void
+    + updateDisplay(): void
+    + updateDisplay(useFirstVariable: boolean): void
+}
+
+class MemoryCalc {
+	- memoryValue: double
+	--
+	# memoryCalc(): void
+	+ displayMemoryValue(): void
+	+ {final} memoryClear(): void
+	+ {final} memoryClear(notifyUser: boolean): void
+	+ <N extends Number> memoryAdd(a: N): void
+	+ <N extends Number> memorySubtract(a: N): void
+	# getMemoryValue(): double
+	+ setMemoryValue(): void
+}
+
+abstract class Calculator {
+	# previousValue: double
+	# currentValue: double
+	# inputValue: double
+	# operator: char
+	--
+	# Calculator()
+	+ <N extends Number> add(a: N): void
+	+ <N extends Number> subtract(a: N): void
+	+ <N extends Number> multiply(a: N): void
+	+ <N extends Number> divide(a: N): void
+	+ {final} clear(): void
+	- void operatorHandler(input: double): void
+	# updateDisplay(): void
+}
+
+class Input {
+	- {static} {final} sc: Scanner
+	--
+	# getLine: String
+	# getString: String
+	# getInt: int
+	# getDouble: double
+	# getIntRange: int
+}
+
+enum TextColor {
+    {static} RESET
+    {static} BLACK
+    {static} RED
+    {static} GREEN
+    {static} YELLOW
+    {static} BLUE
+    {static} PURPLE
+    {static} CYAN
+    {static} WHITE
+    --
+    - code: String
+    --
+    + TextColor(code: String)
+    - toString(): String
+    + colorize(text: String): String
+}
+
+class TestBench {
+    + TestBench()
+    - welcomePrompt(): void
+    - promptAdvancedFeatures(): boolean
+    - setPrecision(calc: Object): void
+    - run(calc: Object): boolean
+    + main(args: String[]): void
+    --
+    - {static} displayMemoryOptions(): int
+    - {static} handleMemoryOptions(calc: Object, option: int): void
+}
+
+interface BasicMath {
+	<N extends Number> add(a: N): void
+	<N extends Number> subtract(a: N): void
+	<N extends Number> multiply(a: N): void
+	<N extends Number> divide (a: N): void
+}
+
+interface AdvanceMath {
+	sqrt(): void
+	<N extends Number> pow(a: N): void
+}
+
+MemoryCalc --|> Calculator
+AdvanceCalc --|> MemoryCalc
+
+Calculator ..|> BasicMath
+AdvanceCalc ..|> AdvanceMath
+
+@enduml

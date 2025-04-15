@@ -11,6 +11,7 @@ package calculator;
  * </ul>
  * Methods available:
  * <ul>
+ *      <li>{@link #Calculator()} - Initializes an instance of the {@link Calculator} class.</li>
  *      <li>{@link #add(N)} - Adds a variable to {@link #previousValue} using double operation logic.</li>
  *      <li>{@link #subtract(N)} - Subtracts a variable to {@link #previousValue} using double operation logic.</li>
  *      <li>{@link #multiply(N)} - Multiplies a variable to {@link #previousValue} using double operation logic.</li>
@@ -31,29 +32,32 @@ public abstract class Calculator implements BasicMath {
     /**
      * Represents the previous value of the calculator.
      */
-    double previousValue;
+    protected double previousValue;
 
     /**
      * Represents the current value of the calculator.
      * This value is updated after each operation.
      */
-    public double currentValue;
+    protected double currentValue;
 
     /**
      * Represents the new input value of the calculator.
      * This value is used for calculations.
      */
-    double inputValue;
+    protected double inputValue;
 
     /**
      * Represents the operator used for the operation.
      */
-    char operator;
+    protected char operator;
 
-    public Calculator() {
+    /**
+     * Default constructor for the {@link Calculator} class.
+     * <p>Initializes an instance of the {@link Calculator} class.</p>
+     */
+    protected Calculator() {
         clear();
     }
-
 
     /**
      * Adds the input value to the previous value.
@@ -70,7 +74,7 @@ public abstract class Calculator implements BasicMath {
         }
         catch (Exception e) {
             // Handles any exceptions that may occur
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error adding: " + e.getMessage() + "\n");
         }
     }
 
@@ -89,7 +93,7 @@ public abstract class Calculator implements BasicMath {
         }
         catch (Exception e) {
             // Handles any exceptions that may occur
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error subtracting: " + e.getMessage() + "\n");
         }
     }
 
@@ -108,7 +112,7 @@ public abstract class Calculator implements BasicMath {
         }
         catch (Exception e) {
             // Handles any exceptions that may occur
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error multiplying: " + e.getMessage() + "\n");
         }
     }
 
@@ -121,17 +125,23 @@ public abstract class Calculator implements BasicMath {
     public <N extends Number> void divide(N a) {
         try {
             this.operator = '/';
-            this.currentValue = this.previousValue / a.doubleValue();
 
+            // Check for division by zero
+            // If the input value is zero, throw an ArithmeticException
+            if (a.doubleValue() == 0) {
+                throw new ArithmeticException();
+            }
+
+            this.currentValue = this.previousValue / a.doubleValue();
             operatorHandler(a.doubleValue());
         } 
         catch (ArithmeticException e) {
             // Handles division by zero
-            System.out.println("Error, tried to divide by zero: " + e.getMessage());
+            System.out.println("Error, tried to divide by zero.\n");
         } 
         catch (Exception e) {
             // Handles any other exceptions that may occur
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error dividing: " + e.getMessage() + "\n");
         }
     }
 
@@ -156,6 +166,7 @@ public abstract class Calculator implements BasicMath {
             this.inputValue = input;
             updateDisplay();
             this.previousValue = this.currentValue;
+            System.out.println();
         } finally {}
     }
 
@@ -165,9 +176,9 @@ public abstract class Calculator implements BasicMath {
      */
     protected void updateDisplay() {
         if (this.operator != '\0') {
-            System.out.println(this.previousValue + " " + this.operator + " " + this.inputValue + " = " + this.currentValue);
+            System.out.println(String.format("%.2f %c %.2f = %.2f\n", this.previousValue, this.operator, this.inputValue, this.currentValue));
         } else {
-            System.out.println("Cannot update display. No operation performed yet.");
+            System.out.println("Cannot update display. No operation performed yet.\n");
         }
     }
 }
