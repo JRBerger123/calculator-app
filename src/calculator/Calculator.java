@@ -16,6 +16,7 @@ package calculator;
  *      <li>{@link #multiply(N)} - Multiplies a variable to {@link #previousValue} using double operation logic.</li>
  *      <li>{@link #divide(N)} - Divides a variable to {@link #previousValue} using double operation logic.</li>
  *      <li>{@link #clear()} - Clears class attributes.</li>
+ *      <li>{@link #operatorHandler(double)} - Handles part of code for operations and updates the display.</li>
  *      <li>{@link #updateDisplay()} - Displays the mathematical operation and the results.</li>
  * </ul>
  *
@@ -65,7 +66,7 @@ public abstract class Calculator implements BasicMath {
             this.operator = '+';
             this.currentValue = this.previousValue + a.doubleValue();
 
-            methodHandler(a.doubleValue());
+            operatorHandler(a.doubleValue());
         }
         catch (Exception e) {
             // Handles any exceptions that may occur
@@ -84,7 +85,7 @@ public abstract class Calculator implements BasicMath {
             this.operator = '-';
             this.currentValue = this.previousValue - a.doubleValue();
             
-            methodHandler(a.doubleValue());
+            operatorHandler(a.doubleValue());
         }
         catch (Exception e) {
             // Handles any exceptions that may occur
@@ -103,7 +104,7 @@ public abstract class Calculator implements BasicMath {
             this.operator = '*';
             this.currentValue = this.previousValue * a.doubleValue();
 
-            methodHandler(a.doubleValue());
+            operatorHandler(a.doubleValue());
         }
         catch (Exception e) {
             // Handles any exceptions that may occur
@@ -122,7 +123,7 @@ public abstract class Calculator implements BasicMath {
             this.operator = '/';
             this.currentValue = this.previousValue / a.doubleValue();
 
-            methodHandler(a.doubleValue());
+            operatorHandler(a.doubleValue());
         } 
         catch (ArithmeticException e) {
             // Handles division by zero
@@ -144,7 +145,13 @@ public abstract class Calculator implements BasicMath {
         this.operator = '\0';
     }
 
-    private void methodHandler(double input) throws Exception{
+    /**
+     * Handles some of the operator logic and updates the display.
+     * This method is called after each operation to show the result.
+     * @param input the input value to be used in the operation
+     * @throws Exception if an error occurs during the operation
+     */
+    private void operatorHandler(double input) throws Exception{
         try {
             this.inputValue = input;
             updateDisplay();
