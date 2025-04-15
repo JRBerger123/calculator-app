@@ -3,14 +3,15 @@
 This Java-based Calculator App is a console application designed to allow users to do calculations of basic and advanced types. This project serves as practice for using Java classes while emphasizing:
 - Abstraction
 - Interfaces
+- Generics
+- Enums
 
 Administrators can:
-- ...
-- ...
-- ...
-- ...
+- Select a calculator with basic or advanced features
+- Do basic operations (+,-,x,/)
+- Do advanced operations (^, sqrt)
+- Manage and store a memory variable
 
-This project separates concerns between the UI (console-based interface) and ...
 <br> 
 
 ## 📌 Table of Contents
@@ -25,7 +26,7 @@ This project separates concerns between the UI (console-based interface) and ...
 - [Top Contributors](#top-contributors)
 
 ## App Preview
-![UML Diagram of Pet App](assets/PetStoreUML.jpg)<br>
+![UML Diagram of Pet App](assets/CalculatorUML.png)<br>
 ![Screenshot 1 of the application's output](assets/Preview_1.png)<br>
 [View Output](output.txt)
 
@@ -33,29 +34,37 @@ This project separates concerns between the UI (console-based interface) and ...
 
 ## 🚀 Key Features
 
-### ...
-- Add, update, and remove pets
-- Categorize pets by species, breed, and unique traits
-- Retrieve detailed pet information
+### 🧮 Basic Arithmetic Operations
+- Perform standard operations: addition, subtraction, multiplication, and division
+- Input validation ensures correct numeric entries
+- Intuitive console prompts for seamless operation
 
-### ...
-- Track flight ability (canFly) and migratory status (isMigratory)
-- Display bird-specific details using the displayItem() method
+### 📐 Advanced Mathematical Features
+- Execute advanced calculations such as:
+  - Square roots of input values
+  - Exponentiation using custom powers
+- Adjustable precision settings for controlling decimal output
+- Dynamically updates operation history and results
+
+### 💾 Memory Functionality
+- Store and recall numeric values using memory features
+- Modify memory with add, subtract, clear, and set commands
+- Display memory values with colorized, precision-aware formatting
 
 ### 📝 Data Validation
-- Ensures proper data entry for all pet details
-- Prevents duplicate pet records
-- Enforces type safety for numeric inputs
+- Validates input ranges for precision and menu selection
+- Gracefully handles invalid or non-numeric user input
+- Type-safe handling of arithmetic operations using Java generics
 
-### 📊 Reporting & Display
-- View a structured list of all pets
-- Search pets by type, breed, or name
-- Interactive console interface for user-friendly navigation
+### 🖥️ Interactive Console UI
+- Step-by-step prompts guide the user through available operations
+- Differentiates between basic and advanced modes
+- Clean output formatting using ANSI colors for better readability
 
 ### 🔒 Security & Reliability
-- Prevents invalid input from disrupting the system
-- Clean and maintainable Java class structure
-- Adheres to object-oriented programming (OOP) best practices
+- Defensive programming to catch and report runtime errors
+- Strict encapsulation of calculator logic and state
+- Modular design following OOP principles for easy maintenance and extensibility
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -84,10 +93,31 @@ To install and run this project locally, follow these steps:
 
 ## Usage
 
-1. Run the application.
-2. Enter the item description, quantity, and price when prompted.
-3. Continue adding items until you are done.
-4. View the detailed receipt with total cost and savings.
+1. Run the application from your terminal or IDE.
+2. Choose whether to use basic or advanced calculator features.
+3. Enter an operation when prompted:
+    
+    - **Basic Mode**
+        - `add` or `+` — Add numbers  
+        - `subtract` or `-` — Subtract numbers  
+        - `multiply` or `*` — Multiply numbers  
+        - `divide` or `/` — Divide numbers  
+
+    - **Advanced Mode**
+        - `sqrt` — Square root  
+        - `pow` — Raise to a power  
+        - `mem` — Access memory options  
+4. (Advanced Mode) Set the desired decimal precision for output.
+5. For memory operations, choose from:
+    
+    - Set Memory Value  
+    - Memory Clear  
+    - Memory Add  
+    - Memory Subtract  
+
+6. Enter `exit` to close the application at any time.
+7. View color-coded output and formatted results after each operation.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
