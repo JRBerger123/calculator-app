@@ -63,10 +63,9 @@ public abstract class Calculator implements BasicMath {
     public <N extends Number> void add(N a) {
         try {
             this.operator = '+';
-
             this.currentValue = this.previousValue + a.doubleValue();
-            updateDisplay();
-            this.previousValue = this.currentValue;
+
+            methodHandler(a.doubleValue());
         }
         catch (Exception e) {
             // Handles any exceptions that may occur
@@ -83,10 +82,9 @@ public abstract class Calculator implements BasicMath {
     public <N extends Number> void subtract(N a) {
         try {
             this.operator = '-';
-
             this.currentValue = this.previousValue - a.doubleValue();
-            updateDisplay();
-            this.previousValue = this.currentValue;
+            
+            methodHandler(a.doubleValue());
         }
         catch (Exception e) {
             // Handles any exceptions that may occur
@@ -103,10 +101,9 @@ public abstract class Calculator implements BasicMath {
     public <N extends Number> void multiply(N a) {
         try {
             this.operator = '*';
-
             this.currentValue = this.previousValue * a.doubleValue();
-            updateDisplay();
-            this.previousValue = this.currentValue;
+
+            methodHandler(a.doubleValue());
         }
         catch (Exception e) {
             // Handles any exceptions that may occur
@@ -123,10 +120,9 @@ public abstract class Calculator implements BasicMath {
     public <N extends Number> void divide(N a) {
         try {
             this.operator = '/';
-
             this.currentValue = this.previousValue / a.doubleValue();
-            updateDisplay();
-            this.previousValue = this.currentValue;
+
+            methodHandler(a.doubleValue());
         } 
         catch (ArithmeticException e) {
             // Handles division by zero
@@ -146,6 +142,14 @@ public abstract class Calculator implements BasicMath {
         this.currentValue = 0.0;
         this.inputValue = 0.0;
         this.operator = '\0';
+    }
+
+    private void methodHandler(double input) throws Exception{
+        try {
+            this.inputValue = input;
+            updateDisplay();
+            this.previousValue = this.currentValue;
+        } finally {}
     }
 
     /**
