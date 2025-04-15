@@ -27,15 +27,12 @@ import java.util.Scanner;
  * @see <a href="https://github.com/Miz-Bl">Micahel Szigethy's GitHub</a>
  */
 public class Input {
-	
     public static Scanner sc = new Scanner(System.in);
 
     public static String getLine(String prompt) {
-		
 		System.out.print(prompt);
 		return Input.sc.nextLine();
-		
-	} // end of getLine
+	}
 
     /**
      * This method prompts for the user's input and verifies that the user input is not empty.
@@ -43,26 +40,20 @@ public class Input {
      * @return the string value entered by the user
      */
     public static String getString(String prompt) {
-
         String userInput;
-
         System.out.print(prompt);
 
         while (true) {
-            userInput = Input.sc.nextLine();
+            userInput = Input.sc.nextLine().trim();
 
-            userInput = userInput.trim();
-
-            if (userInput.isEmpty()){
+            if (userInput.isEmpty()) {
                 System.out.print("Invalid input! Please enter a value: ");
             } else {
                 break;
             }
         }
-
         return userInput;
-
-    } // end of getLine
+    }
 
     /**
      * This method prompts for the user's input and verifies that the user input is a valid integer.
@@ -71,24 +62,17 @@ public class Input {
      */
     public static int getInt(String prompt) {
     	int userInput;
-		
 		System.out.print(prompt);
 
-        // if the data in the buffer is a valid integer
-        // then break out of the validation loop
         while (!Input.sc.hasNextInt()) {
-
             System.out.print("Invalid input! Please enter a number: ");
             Input.sc.next();  // clear the data in the input buffer
+        }
 
-        } // end of while
-			
 		userInput = Input.sc.nextInt();
 		Input.sc.nextLine(); // consume newline left-over
-		
 		return userInput;
-		
-	} // end of getInt
+	}
 
     /**
      * This method prompts for the user's input and verifies that the user input is a valid double.
@@ -100,8 +84,6 @@ public class Input {
 		
 		System.out.print(prompt);
 
-        // if the data in the buffer is a valid integer
-        // then break out of the validation loop
         while (!Input.sc.hasNextDouble()) {
 
             System.out.print("Invalid input! Please enter a double: ");
@@ -123,33 +105,25 @@ public class Input {
      * @return the integer value entered by the user
      */
     public static int getIntRange(String prompt, int low, int high) {
-    	int userInput;
-		
-		System.out.print(prompt);
-		
-		while (true) {
-			if (Input.sc.hasNextInt()) {         // if the data in the buffer is a valid integer
-				userInput = Input.sc.nextInt();  // then store the integer in userInput
-				
-				// if the userInput is within the valid range
-				// then break out of the validation loop
-				if (userInput >= low && userInput <= high) {
-					break;
-				} // end of if
-
-    		} else {
-    			Input.sc.next();  // clear the data in the input buffer
-    		} // end of if-else
-
-			System.out.printf("Invalid input! Please enter a number between (%d - %d): ", low, high);
-
-		} // end of while
-		
-		Input.sc.nextLine(); // consume newline left-over
-
-		return userInput;
-		
-	} // end of getIntRange
+        int userInput = -1;
+    
+        while (true) {
+            System.out.print(prompt);
+            try {
+                String line = Input.sc.nextLine(); // read entire line
+                userInput = Integer.parseInt(line); // parse manually
+    
+                if (userInput >= low && userInput <= high) {
+                    break;
+                } else {
+                    System.out.printf("Invalid input! Please enter a number between (%d - %d): ", low, high);
+                }
+            } catch (NumberFormatException e) {
+                System.out.printf("Invalid input! Please enter a number between (%d - %d): ", low, high);
+            }
+        }
+        return userInput;
+    }
 
     /**
      * This method prompts for the user's input and verifies that the user input is a valid date using the MM-DD-YYYY format.
@@ -158,11 +132,9 @@ public class Input {
      */
     public static String getDate(String prompt) {
         String userInput;
-
         System.out.print(prompt);
 
         while (true) {
-
             userInput = Input.sc.nextLine();
 
             try{
@@ -172,9 +144,6 @@ public class Input {
                 System.out.print("Invalid input! Please enter a valid date (MM-DD-YYYY): ");
             }
         }
-
         return userInput;
-
     }
-
-} // end of library.app.Input class
+}
