@@ -176,7 +176,22 @@ public abstract class Calculator implements BasicMath {
      */
     protected void updateDisplay() {
         if (this.operator != '\0') {
-            System.out.println(String.format("%.2f %c %.2f = %.2f\n", this.previousValue, this.operator, this.inputValue, this.currentValue));
+            String prevStr = String.format("%.2f", this.previousValue);
+            String inputStr = String.format("%.2f", this.inputValue);
+            String currStr = String.format("%.2f", this.currentValue);
+
+            int maxLength = Math.max(prevStr.length(), inputStr.length() + 3); // +2 for operator and space
+            maxLength = Math.max(maxLength, currStr.length());
+
+            // Single line output
+            //System.out.println(String.format("%.2f %c %.2f = %.2f\n", this.previousValue, this.operator, this.inputValue, this.currentValue));
+
+            // Multi line output
+            System.out.println(String.format("%" + maxLength + ".2f", this.previousValue));
+            System.out.println(String.format("%c%" + (maxLength - 1) + ".2f", this.operator, this.inputValue));
+            System.out.println("=".repeat(maxLength));
+            System.out.println(String.format("%" + maxLength + ".2f", this.currentValue) + "\n");
+
         } else {
             System.out.println("Cannot update display. No operation performed yet.\n");
         }

@@ -10,6 +10,7 @@ import app.TextColor;
  *   <li>{@link #AdvanceCalc()} - Initializes an instance of the {@link AdvanceCalc} class.</li>
  *   <li>{@link #sqrt()} - Calculates the square root of the current input value.</li>
  *   <li>{@link #pow(N)} - Raises the current input value to the power of the given exponent.</li>
+ *   <li>{@link #pow(N, String)} - Raises the current input value to the power of the given exponent with color formatting.</li>
  *   <li>{@link #setPrecision(int)} - Sets the precision for calculations.</li>
  *   <li>{@link #displayMemoryValue()} - Displays the current memory value.</li>
  *   <li>{@link #updateDisplay()} - Updates the display with the current operation and result.</li>
@@ -87,13 +88,37 @@ public abstract class AdvanceCalc extends MemoryCalc implements AdvanceMath {
     }
 
     /**
+     *  Uses input value as an exponent value with color formatting.
+     * 
+     * @param a is the exponent
+     * @param color is the color to format the prompt message
+     * @param <N> N is the type of number (e.g., Integer, Double) that this method will work with
+     */
+    public <N extends Number> void pow(N a, String color) {
+        try {
+            this.operator = '^';
+
+            System.out.print(color);
+            this.inputValue = a.doubleValue();
+            System.out.print(TextColor.RESET); // Reset color
+
+            this.currentValue = Math.pow(this.previousValue, a.doubleValue());
+            updateDisplay();
+            this.previousValue = this.currentValue;
+        }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    /**
      * Sets the precision value for calculations.
      *
      * @param p the precision value to be set, as int
      */
     public void setPrecision(int p){
         this.precision = p;
-        System.out.println(TextColor.CYAN.colorize("\tPrecision set to " + this.precision + " decimal places.\n"));
+        System.out.println(TextColor.YELLOW.colorize("\tPrecision set to " + this.precision + " decimal places.\n"));
     }
 
     /**
@@ -125,12 +150,23 @@ public abstract class AdvanceCalc extends MemoryCalc implements AdvanceMath {
      */
     public void updateDisplay(boolean useFirstVariable) {
         if (this.operator != '\0') {
-            String format = "%." + this.precision + "f";
+            String inputStr = String.format("%." + this.precision + "f", this.inputValue);
+            String currStr = String.format("%." + this.precision + "f", this.currentValue);
+
+            int maxLength = Math.max(currStr.length(), inputStr.length() + 3); // +2 for operator and space
+
             if (useFirstVariable) {
-                System.out.println(TextColor.GREEN.colorize(String.format(format + " %s " + format + " = " + format, this.previousValue, this.operator, this.inputValue, this.currentValue)));
+                String prevStr = String.format("%." + this.precision + "f", this.previousValue);
+                maxLength = Math.max(maxLength, prevStr.length());
+
+                System.out.println(String.format("%" + maxLength + "." + this.precision + "f", this.previousValue));
+                System.out.println(String.format("%c%" + (maxLength - 1) + "." + this.precision + "f", this.operator, this.inputValue));
             } else {
-                System.out.println(TextColor.GREEN.colorize(String.format("%s " + format + " = " + format, this.operator, this.previousValue, this.currentValue)));
+                System.out.println(String.format("%c%" + (maxLength - 1) + "." + this.precision + "f", this.operator, this.previousValue));
             }
+
+            System.out.println("=".repeat(maxLength));
+            System.out.println(String.format("%" + maxLength + "." + this.precision + "f", this.currentValue) + "\n");
         } else {
             System.out.println(TextColor.RED.colorize("No operation performed yet."));
         }

@@ -34,6 +34,7 @@ public class TestBench {
      * <p>Initializes an instance of the {@link TestBench} class.</p>
      */
     TestBench() {
+        System.out.print(TextColor.RESET);
         welcomePrompt();
     }
 
@@ -57,11 +58,11 @@ public class TestBench {
 
             switch (userInput) {
                 case "1", "yes", "y" -> {
-                    System.out.println(TextColor.PURPLE.colorize("\tAdvanced Calculator features enabled\n"));
+                    System.out.println(TextColor.BLUE.colorize("\tAdvanced Calculator features enabled\n"));
                     return true;
                 }
                 case "2", "no", "n" -> {
-                    System.out.println(TextColor.PURPLE.colorize("\tBasic Calculator features only\n"));
+                    System.out.println(TextColor.CYAN.colorize("\tBasic Calculator features only\n"));
                     return false;
                 }
                 default -> {
@@ -123,10 +124,12 @@ public class TestBench {
                 case 3 -> {
                     double userInput = Input.getDouble("Enter the value to add to memory: ");
                     advanceCalc.memoryAdd(userInput);
+                    System.out.println();
                 }
                 case 4 -> {
                     double userInput = Input.getDouble("Enter the value to subtract from memory: ");
                     advanceCalc.memorySubtract(userInput);
+                    System.out.println();
                 }
                 default -> System.out.println("Invalid option. Please select a number between 1 and 4.");
             }
@@ -145,29 +148,32 @@ public class TestBench {
         try {
             if (calc instanceof AdvanceCalc advancedCalc) {
                 System.out.println("Available operations: +, -, *, /, mem, sqrt, pow");
-                String userInput = Input.getString("Enter an operation: ");
-    
+                System.out.println("\tor type 'exit' to quit the calculator.\n");
+
+                String userInput = Input.getString("Enter an operation: ", TextColor.BLUE.toString());
+                System.out.print(TextColor.RESET);
+
                 switch (userInput) {
                     case "1", "+", "add" -> {
-                        double val = Input.getDouble("Enter the number to add: ");
+                        double val = Input.getDouble("Enter the number to add: ", TextColor.BLUE.toString());
                         System.out.println();
                         advancedCalc.add(val);
                     }
     
                     case "2", "-", "subtract" -> {
-                        double val = Input.getDouble("Enter the number to subtract: ");
+                        double val = Input.getDouble("Enter the number to subtract: ", TextColor.BLUE.toString());
                         System.out.println();
                         advancedCalc.subtract(val);
                     }
     
                     case "3", "*", "multiply" -> {
-                        double val = Input.getDouble("Enter the number to multiply: ");
+                        double val = Input.getDouble("Enter the number to multiply: ", TextColor.BLUE.toString());
                         System.out.println();
                         advancedCalc.multiply(val);
                     }
     
                     case "4", "/", "divide" -> {
-                        double val = Input.getDouble("Enter the number to divide: ");
+                        double val = Input.getDouble("Enter the number to divide: ", TextColor.BLUE.toString());
                         System.out.println();
                         advancedCalc.divide(val);
                     }
@@ -185,55 +191,58 @@ public class TestBench {
                     }
     
                     case "7", "pow" -> {
-                        double exponent = Input.getDouble("Enter the exponent: ");
+                        double exponent = Input.getDouble("Enter the exponent: ", TextColor.BLUE.toString());
                         System.out.println();
                         advancedCalc.pow(exponent);
                     }
 
                     case "exit" -> {
-                        System.out.println(TextColor.PURPLE.colorize("\nExiting the calculator. Goodbye!"));
+                        System.out.println(TextColor.BLUE.colorize("\nExiting the calculator. Goodbye!"));
                         return false; // Exit the method to stop further execution
                     }
     
-                    default -> System.out.println("\nInvalid operation. Please try again.\n");
+                    default -> System.out.println(TextColor.RED.colorize("\nInvalid operation. Please try again.\n"));
                 }
     
             } else if (calc instanceof Calculator basicCalc) {
 
                 System.out.println("Available operations: +, -, *, /");
-                String userInput = Input.getString("Enter an operation: ");
+                System.out.println("\tor type 'exit' to quit the calculator.\n");
+
+                String userInput = Input.getString("Enter an operation: " + TextColor.CYAN);
+                System.out.print(TextColor.RESET);
 
                 switch (userInput) {
                     case "1", "+", "add" -> {
-                        double val = Input.getDouble("Enter the number to add: ");
+                        double val = Input.getDouble("Enter the number to add: ", TextColor.CYAN.toString());
                         System.out.println();
                         basicCalc.add(val);
                     }
     
                     case "2", "-", "subtract" -> {
-                        double val = Input.getDouble("Enter the number to subtract: ");
+                        double val = Input.getDouble("Enter the number to subtract: ", TextColor.CYAN.toString());
                         System.out.println();
                         basicCalc.subtract(val);
                     }
     
                     case "3", "*", "multiply" -> {
-                        double val = Input.getDouble("Enter the number to multiply: ");
+                        double val = Input.getDouble("Enter the number to multiply: ", TextColor.CYAN.toString());
                         System.out.println();
                         basicCalc.multiply(val);
                     }
     
                     case "4", "/", "divide" -> {
-                        double val = Input.getDouble("Enter the number to divide: ");
+                        double val = Input.getDouble("Enter the number to divide: ", TextColor.CYAN.toString());
                         System.out.println();
                         basicCalc.divide(val);
                     }
 
                     case "exit" -> {
-                        System.out.println(TextColor.PURPLE.colorize("\nExiting the calculator. Goodbye!"));
+                        System.out.println(TextColor.CYAN.colorize("\nExiting the calculator. Goodbye!"));
                         return false; // Exit the method to stop further execution
                     }
     
-                    default -> System.out.println("\nInvalid operation. Please try again.\n");
+                    default -> System.out.println(TextColor.RED.colorize("\nInvalid operation. Please try again.\n"));
                 }
             }
         } catch (Exception e) {
