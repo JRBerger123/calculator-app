@@ -1,0 +1,96 @@
+Welcome to the Calculator App!
+This app allows you to perform arithmetic operations.
+
+Would you like advanced Calculator features? (yes/no): yes
+        Advanced Calculator features enabled
+
+What would you like your calculator's decimal precision to be (0-10)? 3
+        Precision set to 3 decimal places.
+
+Available operations: +, -, *, /, mem, sqrt, pow
+        or type 'exit' to quit the calculator.
+
+Enter an operation: +
+Enter the number to add: 12
+
+    0.000
++  12.000
+=========
+   12.000
+
+
+Available operations: +, -, *, /, mem, sqrt, pow
+        or type 'exit' to quit the calculator.
+
+Enter an operation: -
+Enter the number to subtract: -22
+
+    12.000
+-  -22.000
+==========
+    34.000
+
+
+Available operations: +, -, *, /, mem, sqrt, pow
+        or type 'exit' to quit the calculator.
+
+Enter an operation: *  
+Enter the number to multiply: 1.1
+
+  34.000
+*  1.100
+========
+  37.400
+
+
+Available operations: +, -, *, /, mem, sqrt, pow
+        or type 'exit' to quit the calculator.
+
+Enter an operation: sqrt
+
+√ 37.400
+========
+   6.116
+
+Available operations: +, -, *, /, mem, sqrt, pow
+        or type 'exit' to quit the calculator.
+
+Enter an operation: mem 
+
+Memory Value: 0.000
+Memory Options:
+1. Set Memory Value
+2. Memory Clear
+3. Memory Add
+4. Memory Subtract
+Select an option (1-4): 1
+Memory Value: 6.116
+
+Available operations: +, -, *, /, mem, sqrt, pow
+        or type 'exit' to quit the calculator.
+
+Enter an operation: mem
+
+Memory Value: 6.116
+Memory Options:
+1. Set Memory Value
+2. Memory Clear
+3. Memory Add
+4. Memory Subtract
+Select an option (1-4): 3
+Enter the value to add to memory: 5.61
+   6.116
++  5.610
+========
+  11.726
+
+
+
+Available operations: +, -, *, /, mem, sqrt, pow
+        or type 'exit' to quit the calculator.
+
+Enter an operation: exit
+
+Exiting the calculator. Goodbye!
+Thank you for using the calculator app! Have a great day!
+PS C:\Users\JRBer\Downloads\Java Projects\Calculator App> 

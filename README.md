@@ -26,8 +26,9 @@ Administrators can:
 - [Top Contributors](#top-contributors)
 
 ## App Preview
-![UML Diagram of Pet App](assets/CalculatorUML.png)<br>
+![UML Diagram of App](assets/CalculatorUML.png)<br>
 ![Screenshot 1 of the application's output](assets/Preview_1.png)<br>
+![Screenshot 2 of the application's output](assets/Preview_2.png)<br>
 [View Output](output.txt)
 
 <br>
